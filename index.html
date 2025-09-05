@@ -3,589 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invisible Text Revealer | Online Tool</title>
-  <meta name="description" content="Reveal hidden or invisible text in images, screenshots, and HTML. Free online tool for privacy and forensic analysis.">
-  <meta property="og:title" content="Invisible Text Revealer">
-  <meta property="og:description" content="Reveal hidden text in images and HTML online.">
-  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <title>Invisible Text Revealer Online Free | Hidden Text Viewer Tool</title>
+  <meta name="description" content="Free invisible text revealer online tool. Reveal hidden text in images, HTML, and messages. Detect white-on-white text instantly with one click." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Invisible Text Revealer Online Free">
+  <meta property="og:description" content="Reveal hidden text in images, HTML, and messages. Detect invisible characters instantly." />
+  <meta property="og:image" content="logo.png">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="twitter:title" content="Invisible Text Revealer Online Free">
+  <meta name="twitter:description" content="Reveal hidden or invisible text instantly with our free online tool." />
+  <meta name="twitter:image" content="logo.png">
+
+  <!-- SEO Keywords -->
+  <meta name="keywords" content="invisible text revealer online, free invisible text revealer, hidden text viewer, how to reveal invisible text, invisible text checker, reveal white text on white bg">
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Invisible Text Revealer Online",
+    "url": "https://yourgithubusername.github.io/invisible-text-revealer",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any",
+    "description": "Free online invisible text revealer tool. Detect hidden characters, reveal white text on white backgrounds, and clean invisible text.",
+    "featureList": [
+      "Reveal invisible characters with Unicode breakdown",
+      "One-click clean/remove hidden text",
+      "Auto reveal filter for white text on white bg",
+      "Multi-mode: HTML, Image, Text, WhatsApp, URL"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --bg: #0b1220;
-      --bg-soft: #0f172a;
-      --card: #111827;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --brand: #22d3ee;
-      --brand-2: #60a5fa;
-      --accent: #a78bfa;
-      --ring: rgba(99,102,241,.35);
-      --ok: #34d399;
-      --bad: #f87171;
-      --shadow: 0 10px 30px rgba(2,6,23,.35);
-    }
-    [data-theme="light"] {
-      --bg: #f8fafc;
-      --bg-soft: #f1f5f9;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --brand: #0891b2;
-      --brand-2: #2563eb;
-      --accent: #7c3aed;
-      --ring: rgba(2,132,199,.3);
-      --shadow: 0 12px 40px rgba(2,6,23,.1);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.25), transparent 60%),
-        radial-gradient(900px 500px at 110% 10%, rgba(34,211,238,.2), transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
-
-    /* --- Top Nav --- */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: color-mix(in oklab, var(--bg) 75%, transparent);
-      border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto; padding: .8rem 1rem;
-      display: flex; align-items: center; gap: 1rem; justify-content: space-between;
-    }
-    .brand {
-      display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--text);
-    }
-    .brand .logo {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: conic-gradient(from 180deg, var(--brand), var(--accent), var(--brand-2), var(--brand));
-      box-shadow: var(--shadow);
-      animation: spin-slow 10s linear infinite;
-    }
-    @keyframes spin-slow { to { transform: rotate(1turn); } }
-
-    .nav a.link { color: var(--text); text-decoration: none; opacity:.85; padding:.4rem .6rem; border-radius: 10px; }
-    .nav a.link:hover { background: color-mix(in oklab, var(--text) 8%, transparent); opacity:1; }
-    .actions { display:flex; gap:.5rem; align-items:center; }
-    .btn {
-      appearance: none; border: 0; cursor: pointer;
-      padding: .7rem 1rem; border-radius: 14px; font-weight: 700;
-      background: linear-gradient(135deg, var(--brand-2), var(--accent));
-      color: white; box-shadow: var(--shadow);
-      transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
-    }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.02); }
-    .btn:active { transform: translateY(0); }
-    .btn-ghost { background: transparent; color: var(--text); border: 1px solid color-mix(in oklab, var(--text) 20%, transparent); }
-
-    /* --- Hero (Title centered, then description) --- */
-    .hero { text-align: center; padding: 5rem 1rem 2rem; }
-    .hero h1 {
-      margin: 0 auto .8rem; max-width: 900px; font-size: clamp(2.2rem, 4.5vw, 4rem);
-      line-height: 1.1; letter-spacing: -.02em;
-      background: linear-gradient(180deg, var(--text), color-mix(in oklab, var(--text) 60%, transparent));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .hero p.lede { max-width: 850px; margin: 0 auto 1.6rem; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.25rem); }
-    .hero .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; font-size:.85rem; color: var(--text); background: color-mix(in oklab, var(--text) 8%, transparent); }
-
-    /* --- Sections --- */
-    .section { padding: 2.5rem 1rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 18px; padding: 1rem; box-shadow: var(--shadow); }
-    .grid { display:grid; gap: 1rem; }
-    @media (min-width: 900px){ .grid-2 { grid-template-columns: 1.2fr .8fr; } }
-
-    /* --- Tool --- */
-    .tool-tabs { display:flex; gap:.4rem; margin-bottom: .8rem; flex-wrap: wrap; }
-    .tab { padding:.55rem .9rem; border-radius: 999px; border:1px solid color-mix(in oklab, var(--text) 15%, transparent); background:transparent; color:var(--text); cursor:pointer; font-weight:600; }
-    .tab.active { background: linear-gradient(135deg, color-mix(in oklab, var(--brand-2) 75%, transparent), color-mix(in oklab, var(--accent) 75%, transparent)); border-color: transparent; }
-
-    .fieldset { display:grid; gap:.6rem; margin:.6rem 0 1rem; }
-    .control { display:flex; gap:.6rem; align-items:center; }
-    .control input[type="file"], .control textarea, .control input[type="text"] { width:100%; }
-    textarea { min-height: 140px; resize: vertical; border-radius: 12px; padding: .8rem; background: color-mix(in oklab, var(--text) 6%, transparent); color: var(--text); border:1px solid color-mix(in oklab, var(--text) 18%, transparent); }
-
-    .tool-actions { display:flex; gap:.6rem; flex-wrap:wrap; }
-
-    .outputs { display:grid; gap: 1rem; }
-    @media (min-width: 900px){ .outputs { grid-template-columns: 1fr 1fr; } }
-    .panel { padding: .6rem; border-radius: 14px; background: color-mix(in oklab, var(--text) 6%, transparent); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); }
-    .panel h4 { margin: .3rem .4rem .6rem; opacity:.9; }
-    canvas, img { max-width: 100%; display:block; border-radius: 12px; }
-
-    .slider { width:100%; }
-    .preset { padding:.4rem .7rem; border-radius:10px; border:1px solid color-mix(in oklab, var(--text) 18%, transparent); background:transparent; color:var(--text); cursor:pointer; }
-
-    .pill { display:inline-block; padding:.35rem .6rem; border-radius:999px; font-size:.8rem; background: color-mix(in oklab, var(--text) 8%, transparent); }
-
-    /* --- How To Use --- */
-    .steps { counter-reset: step; display:grid; gap: .8rem; }
-    @media (min-width: 900px){ .steps { grid-template-columns: repeat(4, 1fr); } }
-    .step { position:relative; padding:1rem; background: var(--card); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius:18px; box-shadow: var(--shadow); }
-    .step::before { counter-increment: step; content: counter(step); position:absolute; top:.8rem; right:.8rem; width:32px; height:32px; display:grid; place-items:center; border-radius:8px; font-weight:800; background: linear-gradient(135deg, var(--brand-2), var(--accent)); color: white; }
-
-    /* --- FAQ --- */
-    details { background: var(--card); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: 16px; padding: .8rem 1rem; box-shadow: var(--shadow); }
-    summary { cursor: pointer; font-weight: 700; }
-    details[open] { outline: 2px solid var(--ring); }
-
-    /* --- About & Social --- */
-    .about { display:grid; gap:1rem; }
-    @media (min-width: 900px){ .about { grid-template-columns: 1.2fr .8fr; } }
-    .socials { display:flex; gap:.6rem; flex-wrap: wrap; }
-    .icon-btn { display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; padding:.6rem .9rem; border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 18%, transparent); color:var(--text); }
-    .icon { width:18px; height:18px; }
-
-    /* --- Footer --- */
-    footer { border-top:1px solid color-mix(in oklab, var(--text) 12%, transparent); margin-top: 2rem; }
-    .foot { max-width:1100px; margin:0 auto; padding:1.2rem 1rem; display:grid; gap:1rem; }
-    @media (min-width: 900px){ .foot { grid-template-columns: 1fr auto; align-items:center; } }
-    .links { display:flex; gap:.8rem; flex-wrap:wrap; }
-
-    /* --- Utilities --- */
-    .reveal { opacity:0; transform: translateY(12px) scale(.98); transition: all .6s cubic-bezier(.2,.7,.2,1); }
-    .reveal.show { opacity:1; transform: none; }
-    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: color-mix(in oklab, var(--text) 12%, transparent); padding: .15rem .35rem; border-radius:6px; font-size:.9em; }
-
-    /* Back to top */
-    #toTop { position: fixed; right: 1rem; bottom: 1rem; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
-    #toTop.show { opacity: 1; pointer-events: auto; }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fdfdfd; color:#222; }
+    header { text-align:center; padding:2rem 1rem; background:#4c6ef5; color:#fff; }
+    header h1 { margin:0; font-size:2rem; }
+    nav { display:flex; justify-content:flex-end; padding:1rem; }
+    #toggle-theme { border:none; background:none; font-size:1.5rem; cursor:pointer; }
+    main { max-width:960px; margin:0 auto; padding:2rem 1rem; }
+    .tabs { display:flex; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
+    .tabs button { padding:0.5rem 1rem; border:none; cursor:pointer; border-radius:6px; background:#eee; transition:0.3s; }
+    .tabs button.active { background:#4c6ef5; color:#fff; }
+    section.tool-pane { display:none; }
+    section.tool-pane.active { display:block; animation:fadeIn 0.6s ease-in-out; }
+    textarea, input[type=file], input[type=text] { width:100%; margin:0.5rem 0; padding:0.5rem; border:1px solid #ccc; border-radius:6px; }
+    button.action { background:#4c6ef5; color:#fff; border:none; padding:0.7rem 1.2rem; border-radius:6px; cursor:pointer; margin-top:0.5rem; transition:0.3s; }
+    button.action:hover { background:#364fc7; }
+    .output { background:#f9f9f9; border:1px dashed #ccc; min-height:60px; padding:1rem; margin-top:1rem; white-space:pre-wrap; }
+    footer { background:#222; color:#fff; text-align:center; padding:2rem 1rem; margin-top:2rem; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    .faq h3 { margin-top:1rem; }
+    .tooltip { border-bottom:1px dotted #000; cursor:help; }
   </style>
 </head>
 <body>
-  <!-- Top Navigation -->
-  <div class="nav" role="navigation">
-    <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Invisible Text Revealer Home">
-        <span class="logo" aria-hidden="true"></span>
-        <strong>Invisible Text Revealer</strong>
-      </a>
-      <div class="links" aria-label="Primary">
-        <a class="link" href="#tool">Tool</a>
-        <a class="link" href="#how">How&nbsp;to&nbsp;Use</a>
-        <a class="link" href="#faq">FAQ</a>
-        <a class="link" href="#about">About</a>
-      </div>
-      <div class="actions">
-        <button id="toggle-theme" class="btn-ghost" aria-label="Toggle theme">🌙</button>
-        <a href="#tool" class="btn">Start Free</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hero: Center Title then Description -->
-  <header id="top" class="hero">
-    <div class="badge">🔍 Privacy & Forensics Utility</div>
-    <h1>Reveal Hidden / Invisible Text — Instantly</h1>
-    <p class="lede">Upload an image or paste raw HTML to uncover content that may be white‑on‑white, zero‑opacity, off‑screen, or otherwise hidden. Works right in your browser — no uploads to server.</p>
-    <div style="display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top: .8rem;">
-      <a href="#tool" class="btn">Try the Tool</a>
-      <a href="#how" class="btn btn-ghost">Read How it Works</a>
-    </div>
+  <header>
+    <h1>Invisible Text Revealer Online Free</h1>
+    <p>Detect and reveal hidden text in images, HTML, messages, and URLs.</p>
   </header>
 
-  <!-- Main Tool -->
-  <main id="tool" class="section">
-    <div class="container grid grid-2">
-      <section class="card reveal" aria-labelledby="tool-title">
-        <h2 id="tool-title" style="margin:.2rem 0 1rem">Main Tool</h2>
-        <div class="tool-tabs" role="tablist" aria-label="Input modes">
-          <button class="tab active" role="tab" aria-selected="true" data-target="#image-mode">Image</button>
-          <button class="tab" role="tab" aria-selected="false" data-target="#html-mode">HTML</button>
-        </div>
+  <nav>
+    <button id="toggle-theme">🌙</button>
+  </nav>
 
-        <!-- Image Mode -->
-        <div id="image-mode" class="mode" role="tabpanel">
-          <div class="fieldset">
-            <label class="pill" for="imageInput">Upload screenshot / image</label>
-            <div class="control">
-              <input type="file" id="imageInput" accept="image/*" aria-label="Choose image" />
-              <button class="btn" id="btnRevealImage">Reveal</button>
-              <button class="btn-ghost" id="btnClearImage">Clear</button>
-            </div>
-            <div class="tool-actions">
-              <button class="preset" data-preset="invert">Invert</button>
-              <button class="preset" data-preset="boost">Boost Contrast</button>
-              <button class="preset" data-preset="desaturate">Desaturate</button>
-            </div>
-          </div>
-          <div class="outputs">
-            <div class="panel">
-              <h4>Preview</h4>
-              <img id="imgPreview" alt="preview" hidden>
-              <canvas id="canvasOut" hidden></canvas>
-            </div>
-            <div class="panel">
-              <h4>Tuning</h4>
-              <label>Brightness <input class="slider" type="range" id="rngB" min="-100" max="100" value="0"></label>
-              <label>Contrast <input class="slider" type="range" id="rngC" min="-100" max="100" value="30"></label>
-              <label>Gamma <input class="slider" type="range" id="rngG" min="10" max="300" value="100"></label>
-              <small class="muted">Tip: Try <span class="kbd">Invert</span> and then increase <em>Contrast</em>.</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- HTML Mode -->
-        <div id="html-mode" class="mode" role="tabpanel" hidden>
-          <div class="fieldset">
-            <label class="pill" for="htmlInput">Paste HTML</label>
-            <textarea id="htmlInput" placeholder="&lt;div style='color:#fff;background:#fff'&gt;hidden text&lt;/div&gt;"></textarea>
-            <div class="tool-actions">
-              <button class="btn" id="btnAnalyzeHtml">Analyze</button>
-              <button class="btn-ghost" id="btnClearHtml">Clear</button>
-            </div>
-          </div>
-          <div class="outputs">
-            <div class="panel">
-              <h4>Detected Hidden Text</h4>
-              <div id="htmlFindings" aria-live="polite"></div>
-            </div>
-            <div class="panel">
-              <h4>Reasons / Flags</h4>
-              <ul id="htmlReasons"></ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <aside class="reveal" style="display:grid; gap:1rem;">
-        <div class="card">
-          <h3 style="margin-top:.3rem">Why this tool?</h3>
-          <p style="margin-top:.2rem">Catch suspicious overlays, watermark tricks, and white‑on‑white text. Great for privacy checks, accessibility audits, and content verification.</p>
-          <ul>
-            <li>Works entirely offline in your browser</li>
-            <li>No data leaves your device</li>
-            <li>Fast presets to surface hidden content</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Keyboard Shortcuts</h3>
-          <p><span class="kbd">I</span> invert · <span class="kbd">B</span> boost · <span class="kbd">D</span> desaturate</p>
-        </div>
-      </aside>
+  <main>
+    <!-- Tabs -->
+    <div class="tabs">
+      <button data-target="image" class="active">Image</button>
+      <button data-target="html">HTML</button>
+      <button data-target="text">Text</button>
+      <button data-target="whatsapp">WhatsApp URL</button>
+      <button data-target="url">Website URL</button>
     </div>
+
+    <!-- Image Mode -->
+    <section id="image" class="tool-pane active">
+      <h2>Reveal Hidden Text in Images</h2>
+      <input type="file" id="imageInput" accept="image/*" />
+      <div>
+        <button class="action" onclick="autoRevealImage()">Auto Reveal</button>
+      </div>
+      <canvas id="imageCanvas" style="max-width:100%; margin-top:1rem;"></canvas>
+    </section>
+
+    <!-- HTML Mode -->
+    <section id="html" class="tool-pane">
+      <h2>Reveal Hidden Text in HTML</h2>
+      <textarea id="htmlInput" placeholder="Paste HTML code here..."></textarea>
+      <button class="action" onclick="analyzeHTML()">Analyze HTML</button>
+      <div class="output" id="htmlOutput"></div>
+    </section>
+
+    <!-- Text Mode -->
+    <section id="text" class="tool-pane">
+      <h2>Reveal Invisible Characters in Text</h2>
+      <textarea id="textInput" placeholder="Paste your text..."></textarea>
+      <button class="action" onclick="analyzeText()">Reveal Characters</button>
+      <button class="action" onclick="cleanText()">Clean & Copy</button>
+      <div class="output" id="textOutput"></div>
+    </section>
+
+    <!-- WhatsApp URL Mode -->
+    <section id="whatsapp" class="tool-pane">
+      <h2>Analyze WhatsApp Message URL</h2>
+      <input type="text" id="waInput" placeholder="Paste WhatsApp message link..." />
+      <button class="action" onclick="analyzeWhatsApp()">Analyze</button>
+      <div class="output" id="waOutput"></div>
+    </section>
+
+    <!-- Website URL Mode -->
+    <section id="url" class="tool-pane">
+      <h2>Website Preview & Metadata</h2>
+      <input type="text" id="urlInput" placeholder="Paste website URL..." />
+      <button class="action" onclick="analyzeURL()">Fetch Preview</button>
+      <div class="output" id="urlOutput"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <h3>How to reveal invisible text?</h3>
+      <p>Use our free invisible text revealer online to detect and highlight hidden text in images, HTML, and messages.</p>
+
+      <h3>Why is invisible text not showing?</h3>
+      <p>Invisible text is often hidden with CSS tricks like white-on-white or zero-width characters. Our tool detects and reveals it.</p>
+
+      <h3>Can I check white text on white background?</h3>
+      <p>Yes, use the Auto Reveal feature in Image mode to instantly reveal white-on-white text.</p>
+    </section>
+
+    <!-- About -->
+    <section>
+      <h2>About Us</h2>
+      <p>This free invisible text revealer online tool is created for researchers, students, and everyday users who need to detect hidden content for transparency and safety.</p>
+    </section>
   </main>
 
-  <!-- How To Use -->
-  <section id="how" class="section">
-    <div class="container">
-      <h2 style="text-align:center; margin:0 0 1rem">How to Use (Step‑by‑Step)</h2>
-      <div class="steps">
-        <div class="step reveal">
-          <strong>Choose Mode</strong>
-          <p>Select <em>Image</em> if you have screenshots/photos, or <em>HTML</em> to paste raw markup.</p>
-        </div>
-        <div class="step reveal">
-          <strong>Add Input</strong>
-          <p>Upload an image or paste HTML into the provided field.</p>
-        </div>
-        <div class="step reveal">
-          <strong>Run Reveal</strong>
-          <p>Click <span class="kbd">Reveal</span> / <span class="kbd">Analyze</span>. Try the presets for quick wins.</p>
-        </div>
-        <div class="step reveal">
-          <strong>Tune & Export</strong>
-          <p>Adjust brightness/contrast/gamma. Right‑click canvas to <em>Save image</em>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ (10 items) -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2 style="text-align:center; margin:0 0 1rem">Frequently Asked Questions</h2>
-      <div class="grid" style="grid-template-columns:1fr; gap:.8rem;">
-        <details class="reveal"><summary>1) Does my image leave the browser?</summary><p>No. All processing happens locally in your browser using Canvas APIs.</p></details>
-        <details class="reveal"><summary>2) Can it read text from photos (OCR)?</summary><p>This tool surfaces hidden pixels. For OCR you’ll need a separate text‑recognition tool.</p></details>
-        <details class="reveal"><summary>3) Will it find zero‑opacity or off‑screen HTML text?</summary><p>Yes — the HTML analyzer flags opacity:0, visibility:hidden, display:none, off‑screen positions, and color≈background patterns.</p></details>
-        <details class="reveal"><summary>4) Which image formats are supported?</summary><p>PNG, JPG, JPEG, and most common web image types supported by your browser.</p></details>
-        <details class="reveal"><summary>5) What do the presets do?</summary><p><b>Invert</b> flips pixels; <b>Boost</b> increases contrast; <b>Desaturate</b> removes color noise.</p></details>
-        <details class="reveal"><summary>6) How to save the processed image?</summary><p>Right‑click the canvas preview and choose “Save image as…”.</p></details>
-        <details class="reveal"><summary>7) Is dark mode available?</summary><p>Yes — use the moon/sun button in the header. Preference is saved.</p></details>
-        <details class="reveal"><summary>8) Can I share results?</summary><p>You can download the processed image or copy flagged HTML text directly from the results.</p></details>
-        <details class="reveal"><summary>9) Will it change my original file?</summary><p>No. Processing is non‑destructive and runs on a copy in memory.</p></details>
-        <details class="reveal"><summary>10) Can I add my own FAQs?</summary><p>Absolutely — edit this HTML and replace any question/answer text.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- About & Social -->
-  <section id="about" class="section">
-    <div class="container about">
-      <div class="card reveal">
-        <h2>About Us</h2>
-        <p>We build simple, privacy‑first utilities for creators, analysts, and auditors. Our mission is to make hidden information visible — ethically and transparently — so you can make better decisions.</p>
-        <p class="muted">Contact: <a href="mailto:hello@invisibletools.dev">hello@invisibletools.dev</a></p>
-      </div>
-      <div class="card reveal">
-        <h3>Follow & Share</h3>
-        <div class="socials">
-          <a class="icon-btn" href="#" aria-label="Twitter / X">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.59 8.674L23 22h-7.18l-5.61-7.32L3.23 22H0l8.09-9.24L1 2h7.32l5.06 6.64L18.24 2Zm-1.26 18h2.02L7.12 4h-2L16.98 20Z"/></svg>
-            <span>Twitter</span>
-          </a>
-          <a class="icon-btn" href="#" aria-label="Instagram">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .2 2.7.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.5.5 2.7.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 2-.5 2.7-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.5.5-2.7.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.2-2.7-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.5-.5-2.7C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-2 .5-2.7.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.5-.5 2.7-.5C8.4 2.2 8.8 2.2 12 2.2m0 1.8c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-2 .4-.5.2-.8.4-1.1.7-.3.3-.6.6-.7 1.1-.2.4-.3 1-.4 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1 .2 1.6.4 2 .2.5.4.8.7 1.1.3.3.6.6 1.1.7.4.2 1 .3 2 .4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1-.1 1.6-.2 2-.4.5-.2.8-.4 1.1-.7.3-.3.6-.6.7-1.1.2-.4.3-1 .4-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1-.2-1.6-.4-2-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.6-1.1-.7-.4-.2-1-.3-2-.4-1.2-.1-1.6-.1-4.7-.1m0 2.9a5.1 5.1 0 1 1 0 10.3A5.1 5.1 0 0 1 12 6.9m0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6m5.6-1.7a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4"/></svg>
-            <span>Instagram</span>
-          </a>
-          <a class="icon-btn" href="#" aria-label="YouTube">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.9 3 12 3 12 3s-6.9 0-8.7.4A4 4 0 0 0 .5 6.2 41 41 0 0 0 0 12a41 41 0 0 0 .5 5.8 4 4 0 0 0 2.8 2.8C5.1 21 12 21 12 21s6.9 0 8.7-.4a4 4 0 0 0 2.8-2.8A41 41 0 0 0 24 12a41 41 0 0 0-.5-5.8ZM9.6 15.5V8.5L15.8 12Z"/></svg>
-            <span>YouTube</span>
-          </a>
-          <a class="icon-btn" href="#" aria-label="GitHub">
-            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.3c-3.3.7-4-1.6-4-1.6-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.6 1.2 1.6 1.2 1 .1.6-1.7.6-1.7-.9-1.6-.3-2.8 0-3.1 0 0 .8-.3 2.6.9a9.2 9.2 0 0 1 4.6 0c1.8-1.2 2.6-.9 2.6-.9.3.3.9 1.5 0 3.1 0 0 .5 1.8.6 1.7 0 0 .5-1.1 1.6-1.2 0 0 1.1 0 .1.7 0 0-.7.4-1.2 1.7 0 0-.7 2.3-4 1.6v2.4c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
-            <span>GitHub</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer / Site pages -->
   <footer>
-    <div class="foot">
-      <div class="links">
-        <a class="link" href="#top">Home</a>
-        <a class="link" href="#tool">Tool</a>
-        <a class="link" href="#how">How to Use</a>
-        <a class="link" href="#faq">FAQ</a>
-        <a class="link" href="#about">About</a>
-        <a class="link" href="#" aria-label="Privacy">Privacy</a>
-        <a class="link" href="#" aria-label="Terms">Terms</a>
-        <a class="link" href="#" aria-label="Contact">Contact</a>
-        <a class="link" href="#" aria-label="Sitemap">Sitemap</a>
-      </div>
-      <small style="opacity:.7">© 2025 InvisibleTextRevealer.in — All rights reserved.</small>
-    </div>
+    <p>© 2025 Invisible Text Revealer | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
   </footer>
 
-  <button id="toTop" class="btn" aria-label="Back to top">↑</button>
+<script>
+// Tabs
+const tabs=document.querySelectorAll('.tabs button');
+const panes=document.querySelectorAll('.tool-pane');
+tabs.forEach(btn=>btn.addEventListener('click',()=>{
+  tabs.forEach(b=>b.classList.remove('active'));
+  panes.forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(btn.dataset.target).classList.add('active');
+}));
 
-  <script>
-    // ===== Theme Toggle =====
-    const root = document.documentElement;
-    const btnTheme = document.getElementById('toggle-theme');
-    const stored = localStorage.getItem('theme');
-    if (stored) document.documentElement.setAttribute('data-theme', stored);
-    btnTheme.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
-    btnTheme.addEventListener('click', () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      document.documentElement.setAttribute('data-theme', isLight ? '' : 'light');
-      localStorage.setItem('theme', isLight ? '' : 'light');
-      btnTheme.textContent = isLight ? '🌙' : '☀️';
-    });
+// Theme toggle
+const themeBtn=document.getElementById('toggle-theme');
+themeBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  document.body.style.background=document.body.classList.contains('dark')?'#111':'#fdfdfd';
+  document.body.style.color=document.body.classList.contains('dark')?'#eee':'#222';
+});
 
-    // ===== Tabs (Image / HTML) =====
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(x => x.classList.remove('active')); t.classList.add('active');
-      const target = t.getAttribute('data-target');
-      document.querySelectorAll('.mode').forEach(m => m.hidden = true);
-      document.querySelector(target).hidden = false;
-      t.setAttribute('aria-selected', 'true');
-      tabs.forEach(x => { if (x!==t) x.setAttribute('aria-selected','false'); });
-    }));
-
-    // ===== Reveal on scroll =====
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // ===== Back to Top =====
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
-    });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // ===== IMAGE PIPELINE =====
-    const imageInput = document.getElementById('imageInput');
-    const imgPreview = document.getElementById('imgPreview');
-    const canvasOut = document.getElementById('canvasOut');
-    const ctx = canvasOut.getContext('2d');
-    const rngB = document.getElementById('rngB');
-    const rngC = document.getElementById('rngC');
-    const rngG = document.getElementById('rngG');
-
-    let imgLoaded = false;
-    function loadImg(file){
-      const url = URL.createObjectURL(file);
-      imgPreview.src = url; imgPreview.hidden = false;
-      imgPreview.onload = () => { drawToCanvas(); URL.revokeObjectURL(url); imgLoaded = true; };
+// Auto Reveal Filter (Image)
+function autoRevealImage(){
+  const file=document.getElementById('imageInput').files[0];
+  if(!file) return alert('Upload an image first.');
+  const canvas=document.getElementById('imageCanvas');
+  const ctx=canvas.getContext('2d');
+  const img=new Image();
+  img.onload=()=>{
+    canvas.width=img.width; canvas.height=img.height;
+    ctx.drawImage(img,0,0);
+    let imageData=ctx.getImageData(0,0,canvas.width,canvas.height);
+    let data=imageData.data;
+    for(let i=0;i<data.length;i+=4){
+      // simple invert + contrast boost
+      data[i]=255-data[i];
+      data[i+1]=255-data[i+1];
+      data[i+2]=255-data[i+2];
     }
+    ctx.putImageData(imageData,0,0);
+  };
+  img.src=URL.createObjectURL(file);
+}
 
-    imageInput.addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return; loadImg(file);
-    });
-
-    document.getElementById('btnRevealImage').addEventListener('click', () => { if (imgLoaded) applyAdjustments(); });
-    document.getElementById('btnClearImage').addEventListener('click', () => {
-      imageInput.value = ''; imgPreview.hidden = true; canvasOut.hidden = true; imgLoaded = false;
-    });
-
-    [rngB, rngC, rngG].forEach(r => r.addEventListener('input', () => { if (imgLoaded) applyAdjustments(); }));
-
-    document.addEventListener('keydown', (e) => {
-      if (!imgLoaded) return;
-      if (e.key.toLowerCase() === 'i') applyPreset('invert');
-      if (e.key.toLowerCase() === 'b') applyPreset('boost');
-      if (e.key.toLowerCase() === 'd') applyPreset('desaturate');
-    });
-
-    document.querySelectorAll('.preset').forEach(p => p.addEventListener('click', () => applyPreset(p.dataset.preset)));
-
-    function drawToCanvas(){
-      const w = imgPreview.naturalWidth; const h = imgPreview.naturalHeight;
-      const max = 1800; const scale = Math.min(1, max / Math.max(w, h));
-      canvasOut.width = Math.round(w * scale); canvasOut.height = Math.round(h * scale);
-      ctx.drawImage(imgPreview, 0, 0, canvasOut.width, canvasOut.height);
-      canvasOut.hidden = false;
+// HTML Analyzer
+function analyzeHTML(){
+  const input=document.getElementById('htmlInput').value;
+  if(!input.trim()){ alert('Paste HTML first.'); return; }
+  let output='';
+  const parser=new DOMParser();
+  const doc=parser.parseFromString(input,'text/html');
+  doc.querySelectorAll('*').forEach(el=>{
+    const style=window.getComputedStyle(el);
+    if(style && (style.opacity==='0'||style.visibility==='hidden'||style.display==='none')){
+      output+=`Hidden element detected: <code>${el.outerHTML}</code>\n`;
     }
+  });
+  document.getElementById('htmlOutput').innerHTML=output||'No hidden elements detected.';
+}
 
-    function applyAdjustments(){
-      drawToCanvas();
-      const imgData = ctx.getImageData(0, 0, canvasOut.width, canvasOut.height);
-      const d = imgData.data;
-      const b = parseInt(rngB.value, 10); // -100..100
-      const c = Math.pow((parseInt(rngC.value, 10) + 100) / 100, 2); // contrast factor
-      const g = parseInt(rngG.value, 10) / 100; // 0.1..3
-      for (let i=0;i<d.length;i+=4){
-        let r=d[i], gch=d[i+1], bch=d[i+2];
-        // gamma
-        r = 255*Math.pow(r/255, 1/g); gch = 255*Math.pow(gch/255, 1/g); bch = 255*Math.pow(bch/255, 1/g);
-        // brightness
-        r += b; gch += b; bch += b;
-        // contrast around 128
-        r = (r-128)*c + 128; gch = (gch-128)*c + 128; bch = (bch-128)*c + 128;
-        d[i] = clamp(r); d[i+1] = clamp(gch); d[i+2] = clamp(bch);
-      }
-      ctx.putImageData(imgData, 0, 0);
+// Text Analyzer (Unicode breakdown)
+function analyzeText(){
+  const input=document.getElementById('textInput').value;
+  if(!input.trim()){ alert('Paste text first.'); return; }
+  let output='';
+  for(let ch of input){
+    const code=ch.codePointAt(0);
+    if(code===32||code===10){ output+=ch; continue; } // skip normal space/newline
+    if(ch==='\u200B'||/\s/.test(ch)===false && code<32){
+      output+=`<span class="tooltip">${ch||'[INV]'}<span> U+${code.toString(16).toUpperCase()} </span></span>`;
+    } else {
+      output+=ch;
     }
+  }
+  document.getElementById('textOutput').innerHTML=output;
+}
 
-    function clamp(v){ return v<0?0:(v>255?255:v); }
+// Clean Text
+function cleanText(){
+  const input=document.getElementById('textInput').value;
+  const clean=input.replace(/[\u200B-\u200D\uFEFF]/g,'');
+  navigator.clipboard.writeText(clean);
+  alert('Clean text copied to clipboard.');
+}
 
-    function applyPreset(name){
-      if (!imgLoaded) return;
-      drawToCanvas();
-      const imgData = ctx.getImageData(0, 0, canvasOut.width, canvasOut.height);
-      const d = imgData.data;
-      if (name === 'invert'){
-        for (let i=0;i<d.length;i+=4){ d[i]=255-d[i]; d[i+1]=255-d[i+1]; d[i+2]=255-d[i+2]; }
-      }
-      if (name === 'boost'){
-        for (let i=0;i<d.length;i+=4){
-          d[i]   = clamp((d[i]-128)*1.6 + 128);
-          d[i+1] = clamp((d[i+1]-128)*1.6 + 128);
-          d[i+2] = clamp((d[i+2]-128)*1.6 + 128);
-        }
-      }
-      if (name === 'desaturate'){
-        for (let i=0;i<d.length;i+=4){
-          const y = 0.2126*d[i] + 0.7152*d[i+1] + 0.0722*d[i+2];
-          d[i]=d[i+1]=d[i+2]=y;
-        }
-      }
-      ctx.putImageData(imgData, 0, 0);
-    }
+// WhatsApp Analyzer (basic)
+function analyzeWhatsApp(){
+  const url=document.getElementById('waInput').value;
+  if(!url.includes('wa.me')&&!url.includes('api.whatsapp.com')){alert('Not a valid WhatsApp link'); return;}
+  document.getElementById('waOutput').textContent=`WhatsApp link detected: ${url}`;
+}
 
-    // ===== HTML ANALYZER =====
-    const htmlInput = document.getElementById('htmlInput');
-    const htmlFindings = document.getElementById('htmlFindings');
-    const htmlReasons = document.getElementById('htmlReasons');
-
-    document.getElementById('btnAnalyzeHtml').addEventListener('click', analyzeHtml);
-    document.getElementById('btnClearHtml').addEventListener('click', () => {
-      htmlInput.value = ''; htmlFindings.innerHTML = ''; htmlReasons.innerHTML = '';
-    });
-
-    function analyzeHtml(){
-      const src = htmlInput.value.trim();
-      if (!src) return;
-      // Create a sandbox container
-      const sandbox = document.createElement('iframe');
-      sandbox.setAttribute('sandbox', 'allow-same-origin');
-      sandbox.style.display = 'none';
-      document.body.appendChild(sandbox);
-      const doc = sandbox.contentDocument;
-      doc.open(); doc.write(src); doc.close();
-
-      const suspicious = [];
-      const reasonsSet = new Set();
-      const walker = doc.createTreeWalker(doc.body || doc, NodeFilter.SHOW_ELEMENT, null);
-      let node;
-      while((node = walker.nextNode())){
-        const cs = doc.defaultView.getComputedStyle(node);
-        if (!cs) continue;
-        const text = node.textContent && node.textContent.trim();
-        if (!text) continue;
-        // flags
-        const flags = [];
-        if (cs.opacity === '0') flags.push('opacity:0');
-        if (cs.visibility === 'hidden') flags.push('visibility:hidden');
-        if (cs.display === 'none') flags.push('display:none');
-        if (parseFloat(cs.fontSize) <= 1) flags.push('font-size≈0');
-        if (parseFloat(cs.textIndent) < -50) flags.push('text-indent negative');
-        const left = parseFloat(cs.left), top = parseFloat(cs.top);
-        if (!isNaN(left) && Math.abs(left) > 2000) flags.push('position off-screen');
-        if (!isNaN(top) && Math.abs(top) > 2000) flags.push('position off-screen');
-        if (cs.color === 'rgba(0, 0, 0, 0)') flags.push('color:transparent');
-        // white-on-white (approx): compare rgb to background
-        const col = parseRGB(cs.color); const bg = parseRGB(cs.backgroundColor);
-        if (col && bg){ const dist = Math.abs(col.r-bg.r)+Math.abs(col.g-bg.g)+Math.abs(col.b-bg.b); if (dist < 20) flags.push('color≈background'); }
-
-        if (flags.length){
-          suspicious.push({ text, flags });
-          flags.forEach(f => reasonsSet.add(f));
-        }
-      }
-
-      htmlFindings.innerHTML = '';
-      if (!suspicious.length){
-        htmlFindings.innerHTML = '<p><span class="pill" style="background:var(--ok);color:#002b1a;">No hidden text patterns found</span></p>';
-      } else {
-        const list = document.createElement('ol');
-        suspicious.slice(0, 200).forEach(item => {
-          const li = document.createElement('li');
-          li.style.margin = '.4rem 0';
-          const flags = item.flags.map(f=>`<span class="pill">${f}</span>`).join(' ');
-          li.innerHTML = `<div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:baseline"><code class="kbd" style="white-space:pre-wrap">${escapeHtml(item.text).slice(0,500)}</code> ${flags}</div>`;
-          list.appendChild(li);
-        });
-        htmlFindings.appendChild(list);
-      }
-
-      htmlReasons.innerHTML = '';
-      if (reasonsSet.size){
-        reasonsSet.forEach(r => {
-          const li = document.createElement('li'); li.textContent = r; htmlReasons.appendChild(li);
-        });
-      }
-      // cleanup
-      sandbox.remove();
-    }
-
-    function parseRGB(str){
-      if (!str) return null;
-      const m = str.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i); if (!m) return null;
-      return { r:+m[1], g:+m[2], b:+m[3] };
-    }
-    function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
-
-  </script>
+// Website URL Analyzer (metadata fetch)
+async function analyzeURL(){
+  const url=document.getElementById('urlInput').value;
+  if(!url){alert('Enter a URL');return;}
+  try{
+    const res=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+    const data=await res.json();
+    const html=data.contents;
+    const parser=new DOMParser();
+    const doc=parser.parseFromString(html,'text/html');
+    const title=doc.querySelector('title')?.innerText||'No title';
+    const desc=doc.querySelector('meta[name="description"]')?.content||'No description';
+    document.getElementById('urlOutput').innerHTML=`<b>Title:</b> ${title}<br><b>Description:</b> ${desc}`;
+  }catch(e){
+    document.getElementById('urlOutput').textContent='Error fetching URL (CORS restricted)';
+  }
+}
+</script>
 </body>
 </html>
