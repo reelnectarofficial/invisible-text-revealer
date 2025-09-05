@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reelnectarofficial.github.io/invisible-text-revealer/sitemap.xml
