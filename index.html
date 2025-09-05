@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invisible Text Revealer | Online Tool</title>
+  <meta name="description" content="Reveal hidden or invisible text in images, screenshots, and HTML. Free online tool for privacy and forensic analysis.">
+  <meta property="og:title" content="Invisible Text Revealer">
+  <meta property="og:description" content="Reveal hidden text in images and HTML online.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Invisible Text Revealer</h1>
+      <button id="toggle-theme">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Reveal Hidden Text Instantly</h2>
+      <p>Upload an image or paste HTML to uncover invisible content.</p>
+      <input type="file" id="imageInput" accept="image/*" />
+      <textarea id="htmlInput" placeholder="Paste HTML here..."></textarea>
+      <button onclick="revealText()">Reveal Text</button>
+      <div id="output"></div>
+    </section>
+
+    <section class="features">
+      <h3>Features</h3>
+      <ul>
+        <li>Detect white-on-white text</li>
+        <li>Reveal zero-opacity or hidden layers</li>
+        <li>Works on screenshots, HTML, and images</li>
+      </ul>
+    </section>
+
+    <section class="newsletter">
+      <h3>Get Updates</h3>
+      <form id="newsletterForm">
+        <input type="email" placeholder="Your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 InvisibleTextRevealer.in</p>
+    <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
